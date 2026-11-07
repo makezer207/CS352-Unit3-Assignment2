@@ -25,6 +25,21 @@ public class CaveExplorer {
 
 	// Step 2: toString method
 	
+	@Override 
+	
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+
+		for (char[] row : cave) {
+			for (char cell : row) {
+				result.append(cell);
+			}
+			result.append('\n');
+		}
+
+		return result.toString();
+	}
+
 	// Step 3: solve method
 	
 	// Step 4: getPath method
