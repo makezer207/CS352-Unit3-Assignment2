@@ -1,3 +1,9 @@
+/*
+Mitchell Kezer
+CS352 Unit 3 Assignment 2
+11/8/2026
+*/
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -5,6 +11,18 @@ import java.util.Scanner;
 public class CaveExplorer {
 	// Step 1: Zero parameter constructor to create the specified cave
 	
+	private char [][] cave;
+
+	public CaveExplorer() {
+		cave = new char[][] {
+			{'R', 'R', 'R', 'R', 'R', 'R'},
+			{'R', '.', '.', 'S', 'R', 'R'},
+			{'R', '.', 'R', 'R', 'R', 'R'},
+			{'R', '.', 'M', 'R', 'R', 'R'},
+			{'R', 'R', 'R', 'R', 'R', 'R'}
+		};
+	}
+
 	// Step 2: toString method
 	
 	// Step 3: solve method
