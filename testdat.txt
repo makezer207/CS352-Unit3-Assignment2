@@ -1,3 +1,7 @@
-2 3
-.RR
-MSR
+6 7
+RRRR..S
+RRRR.RR
+RRRR.RR
+RR...RR
+RR.RRRR
+RR...MR

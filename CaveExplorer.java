@@ -155,7 +155,13 @@ public class CaveExplorer {
 	}
 
 	// Step 5: One parameter constructor to read from a file
+	
 	/*
+	The code below implements a one-parameter constructor that reads the cave layout from a specified file.
+	It uses a Scanner to read the number of rows and columns, then constructs the cave array and populates it 
+	with the data from the file.
+	*/
+
 	public CaveExplorer (String fname) throws Exception {
 	      Scanner in = new Scanner(new File(fname));
 
@@ -164,9 +170,20 @@ public class CaveExplorer {
     	  String s = in.nextLine(); // Skip newline character
     	   	  
     	  // Construct cave and populate with rest of data in the file
-    	  
+
+		  cave = new char[rows][cols];
+
+		  for (int row = 0; row < rows; row++) {
+				s = in.nextLine();
+
+			  	for (int col = 0; col < cols; col++) {
+				  	cave[row][col] = s.charAt(col);
+			  }
+		  }
+		  
+		  in.close();
 	}
-	*/
+	
 
 	
 	public static void main(String[] args) {
@@ -182,9 +199,24 @@ public class CaveExplorer {
 		// Uncomment code below to start testing your 1-parameter constructor
 
 		/*
+		The code below creates a CaveExplorer object using the one-parameter constructor that reads the cave 
+		layout from a file. It prints the cave layout, calls the solve method, and prints whether a path to the 
+		mirror pool was found.
+		*/
+
 		String fileName = "testdat.txt"; 
 		try { 
 			CaveExplorer ce2 = new CaveExplorer(fileName); 
+			System.out.println("Cave layout from file:");
+			System.out.print(ce2.toString());
+			System.out.println();
+
+			boolean solvedPath = ce2.solve();
+			System.out.println("Solved path: " + solvedPath);
+
+			if (solvedPath) {
+				System.out.println("Path to mirror pool: " + ce2.getPath());
+			}
 		} 
 		catch (FileNotFoundException e ) {
 			System.out.println("Can't find file " + fileName); 
@@ -192,10 +224,8 @@ public class CaveExplorer {
 		catch (Exception e) {
 			System.out.println("Other error: " + e.getMessage());
 		}
-		*/
-		 
 
-		
+		System.out.println();
 		System.out.println("Finished CaveExplorer");
 	}
 
