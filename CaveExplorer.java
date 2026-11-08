@@ -144,6 +144,16 @@ public class CaveExplorer {
 
 	// Step 4: getPath method
 	
+	/*
+	The code below implements a simple getPath method that returns the path taken to reach the mirror pool. 
+	It simply returns the value of the path String variable, which is updated in the solve method when the mirror 
+	pool is found.
+	*/
+
+	public String getPath() {
+		return path;
+	}
+
 	// Step 5: One parameter constructor to read from a file
 	/*
 	public CaveExplorer (String fname) throws Exception {
