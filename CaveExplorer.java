@@ -1,18 +1,34 @@
 /*
 Mitchell Kezer
-CS352 Unit 3 Assignment 2
-11/8/2026
+CS352 Unit 4 Assignment 2
+11/15/2026
 */
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class CaveExplorer {
 	// Step 1: Zero parameter constructor to create the specified cave
 	
 	private char [][] cave;
 	private String path = "";
+
+	/* New helper class to help solve() store a position and route.
+	*/
+
+	private static class Position {
+		int row;
+		int col;
+		String route;
+
+		public Position(int row, int col, String route) {
+			this.row = row;
+			this.col = col;
+			this.route = route;
+		}
+	}
 
 	public CaveExplorer() {
 		cave = new char[][] {
@@ -57,16 +73,17 @@ public class CaveExplorer {
 		int startCol = -1;
 
 		/*
-		The code below finds the starting position 'S' in the cave and initializes the startRow and 
-		startCol variables. It also checks if the starting position was found; if not, it returns false, 
-		indicating that there is no valid path to the mirror pool.
+		The code below finds the starting position 'S' in the cave array by iterating through each cell.
+		If 'S' is found, it records the row and column indices. If 'S' is not found, it returns false, indicating 
+		that there is no starting position to begin the search for a path to the mirror pool.
 		*/
 
-		for (int row = 0; row < cave.length; row++) {
+		for (int row = 0; row < cave.length && startRow == -1; row++) {
 			for (int col = 0; col < cave[row].length; col++) {
 				if (cave[row][col] == 'S') {
 					startRow = row;
 					startCol = col;
+					break;
 				}
 			}
 		}
@@ -76,79 +93,52 @@ public class CaveExplorer {
 		}
 
 		/*
-		The code below initializes a 2D boolean array to keep track of visited positions in the cave,
-		and a StringBuilder to build the path taken. It also defines arrays for row and column changes
-		corresponding to moving north, south, west, and east, as well as a String array representing 
-		the directions.
+		The code below initializes a 2D boolean array to keep track of visited positions in the cave. It also 
+		initializes a stack to facilitate the depth-first search (DFS) algorithm. The row and column direction 
+		arrays define the possible movements (north, south, west, east), and the corresponding direction array 
+		stores the string representation of each movement. The starting position is marked as visited, and the 
+		initial position is pushed onto the stack with an empty route. The while loop continues until the stack is 
+		empty, popping the current position and checking if it is the mirror pool 'M'. If found, it stores the route 
+		and returns true. Otherwise, it explores all possible moves, marking new positions as visited and pushing them 
+		onto the stack with the updated route. If no valid moves are left and the exit is not found, it returns false.
 		*/
 
 		boolean [][] visited = new boolean[cave.length][cave[0].length];
-		StringBuilder route = new StringBuilder();
+		Stack<Position> stack = new Stack<>();
 
 		int [] rowDirection = {-1, 1, 0, 0}; // North, South, West, East
 		int [] colDirection = {0, 0, -1, 1};
 		String [] direction = {"n", "s", "w", "e"};
 
-		int row = startRow;
-		int col = startCol;
+		visited [startRow][startCol] = true;
+		stack.push(new Position(startRow, startCol, "")); 
 
-		/*
-		The code below implements a loop that continues until the mirror pool 'M' is found or there are no valid 
-		moves left. It checks each direction for valid moves, updates the current position, and appends the 
-		direction to the route. If the mirror pool is found, it sets the path and returns true. If no valid moves 
-		are left, it returns false.
-		*/
-	
-		while (true) {
-			if (cave[row][col] == 'M') {
-				path = route.toString();
+		while (!stack.empty()) {
+			Position current = stack.pop();
+
+			if (cave[current.row][current.col] == 'M') {
+				path = current.route;
 				return true; // Found the exit
 			}
 
-			visited[row][col] = true;
+			for (int i = direction.length - 1; i >= 0; i--) {
+				int newRow = current.row + rowDirection[i];
+				int newCol = current.col + colDirection[i];
 
-			int nextRow = -1;
-			int nextCol = -1;
-			String nextDirection = "";
-			
-			/*
-			The code below checks each direction (north, south, west, east) to see if moving in that direction 
-			is valid. A move is valid if it stays within the bounds of the cave, does not hit a rock 'R', and 
-			has not been visited yet. If a valid move is found, it updates the nextRow, nextCol, and nextDirection 
-			variables accordingly. The visited array is what prevents the program from going back to a previously 
-			visited position, ensuring that the algorithm does not get stuck in an infinite loop.
-			*/
-
-			for (int i = 0 ; i < direction.length; i++) {
-				int newRow = row + rowDirection[i];
-				int newCol = col + colDirection[i];
-
-				if (newRow >= 0 && newRow < cave.length && newCol >= 0 && newCol < cave[newRow].length 
-					&& cave[newRow][newCol] != 'R' && !visited[newRow][newCol]) {
-					nextRow = newRow;
-					nextCol = newCol;
-					nextDirection = direction[i];
-					break;
+				boolean checkMove = newRow >= 0 && newRow < cave.length 
+					&& newCol >= 0 && newCol < cave[newRow].length;
+				
+				if (checkMove && cave[newRow][newCol] != 'R' && !visited[newRow][newCol]) {
+					visited[newRow][newCol] = true;
+					stack.push(new Position(newRow, newCol, current.route + direction[i]));
+				}
 			}
 		}
 
-		if (nextRow == -1 || nextCol == -1) {
-			return false; 
-		}
+		path = "";
+		return false; // No valid moves left and exit not found
+	} 
 
-		route.append(nextDirection);
-		row = nextRow;
-		col = nextCol;
-		}
-	}
-
-	// Step 4: getPath method
-	
-	/*
-	The code below implements a simple getPath method that returns the path taken to reach the mirror pool. 
-	It simply returns the value of the path String variable, which is updated in the solve method when the mirror 
-	pool is found.
-	*/
 
 	public String getPath() {
 		return path;
@@ -254,5 +244,4 @@ public class CaveExplorer {
 		System.out.println();
 		System.out.println("Finished CaveExplorer");
 	}
-
 }
