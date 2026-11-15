@@ -139,6 +139,7 @@ public class CaveExplorer {
 		return false; // No valid moves left and exit not found
 	} 
 
+	// Step 4: getPath method stays the same since it is already implemented correctly in the solve method.
 
 	public String getPath() {
 		return path;
