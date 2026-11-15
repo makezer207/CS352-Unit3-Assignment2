@@ -1,0 +1,9 @@
+8 8 
+RR.RRRRR
+RR.....S
+RR.RRRRR
+RR....RR
+RR.RRRRR
+RR.....M
+RRR.RRRR
+RRR.RRRR

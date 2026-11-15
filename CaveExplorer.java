@@ -242,6 +242,57 @@ public class CaveExplorer {
 			System.out.println("Other error: " + e.getMessage());
 		}
 
+		/*
+		Third CaveExplorer object read from a different file.
+		*/
+
+		String fileName3 = "testdat3.txt"; 
+		try { 
+			CaveExplorer ce3 = new CaveExplorer(fileName3); 
+			System.out.println();
+			System.out.println("Second cave layout from file:");
+			System.out.print(ce3.toString());
+			System.out.println();
+
+			boolean solvedPath = ce3.solve();
+			System.out.println("Solved path: " + solvedPath);
+
+			if (solvedPath) {
+				System.out.println("Path to mirror pool: " + ce3.getPath());
+			}
+		} 
+		catch (FileNotFoundException e ) {
+			System.out.println("Can't find file " + fileName3); 
+		}
+		catch (Exception e) {
+			System.out.println("Other error: " + e.getMessage());
+		}
+
+		/*
+		Fourth CaveExplorer object read from a different file.
+		*/
+		String fileName4 = "testdat4.txt"; 
+		try { 
+			CaveExplorer ce4 = new CaveExplorer(fileName4); 
+			System.out.println();
+			System.out.println("Fourth cave layout from file:");
+			System.out.print(ce4.toString());
+			System.out.println();
+
+			boolean solvedPath = ce4.solve();
+			System.out.println("Solved path: " + solvedPath);
+
+			if (solvedPath) {
+				System.out.println("Path to mirror pool: " + ce4.getPath());
+			}
+		} 
+		catch (FileNotFoundException e ) {
+			System.out.println("Can't find file " + fileName4); 
+		}
+		catch (Exception e) {
+			System.out.println("Other error: " + e.getMessage());
+		}
+
 		System.out.println();
 		System.out.println("Finished CaveExplorer");
 	}

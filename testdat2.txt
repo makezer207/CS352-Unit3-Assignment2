@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 7 7 
 RRRRRRR
 RSRRRRR
@@ -6,13 +5,4 @@ R...RRR
 RRR.RRR
 RRR.RRR
 M...RRR
-=======
-7 7 
-RRRRRRR
-RSRRRRR
-R...RRR
-RRR.RRR
-RRR.RRR
-M...RRR
->>>>>>> 571774fae1e5e378bf01c243b11e61afa64ea381
 RRRRRRR
