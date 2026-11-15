@@ -198,11 +198,12 @@ public class CaveExplorer {
 		String fileName = "testdat.txt"; 
 		try { 
 			CaveExplorer ce1 = new CaveExplorer(fileName); 
+			boolean solvedPath = ce1.solve();
+
 			System.out.println("Cave layout from file:");
 			System.out.print(ce1.toString());
 			System.out.println();
 
-			boolean solvedPath = ce1.solve();
 			System.out.println("Solved path: " + solvedPath);
 
 			if (solvedPath) {
@@ -223,12 +224,13 @@ public class CaveExplorer {
 		String fileName2 = "testdat2.txt"; 
 		try { 
 			CaveExplorer ce2 = new CaveExplorer(fileName2); 
+			boolean solvedPath = ce2.solve();
+
 			System.out.println();
 			System.out.println("Second cave layout from file:");
 			System.out.print(ce2.toString());
 			System.out.println();
 
-			boolean solvedPath = ce2.solve();
 			System.out.println("Solved path: " + solvedPath);
 
 			if (solvedPath) {
@@ -249,12 +251,13 @@ public class CaveExplorer {
 		String fileName3 = "testdat3.txt"; 
 		try { 
 			CaveExplorer ce3 = new CaveExplorer(fileName3); 
+			boolean solvedPath = ce3.solve();
+
 			System.out.println();
 			System.out.println("Second cave layout from file:");
 			System.out.print(ce3.toString());
 			System.out.println();
 
-			boolean solvedPath = ce3.solve();
 			System.out.println("Solved path: " + solvedPath);
 
 			if (solvedPath) {
@@ -274,12 +277,13 @@ public class CaveExplorer {
 		String fileName4 = "testdat4.txt"; 
 		try { 
 			CaveExplorer ce4 = new CaveExplorer(fileName4); 
+			boolean solvedPath = ce4.solve();
+			
 			System.out.println();
 			System.out.println("Fourth cave layout from file:");
 			System.out.print(ce4.toString());
 			System.out.println();
 
-			boolean solvedPath = ce4.solve();
 			System.out.println("Solved path: " + solvedPath);
 
 			if (solvedPath) {
